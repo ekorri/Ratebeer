@@ -1,1 +1,1 @@
-http://safe-sierra-80159.herokuapp.com/breweries
+http://safe-sierra-80159.herokuapp.com

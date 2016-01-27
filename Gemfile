@@ -46,3 +46,14 @@ group :production do
    gem 'rails_12factor'
 end
 ruby '2.1.5'
+
+group :development, :test do
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+end
+
+group :development, :test do
+  gem "better_errors"
+
+  #...
+end
