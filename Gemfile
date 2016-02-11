@@ -47,9 +47,12 @@ group :production do
 end
 ruby '2.1.5'
 
+group :development do
+  gem 'web-console', '~> 2.0'
+end
+
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
@@ -57,3 +60,15 @@ group :development, :test do
 
   #...
 end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+
+end
+gem 'simplecov', require: false

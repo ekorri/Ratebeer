@@ -9,9 +9,13 @@ class RatingsController < ApplicationController
   end
 
   def create
+    if current_user.nil?
+      redirect_to signin_path, notice:'you should be signed in'
+    end
     rating = Rating.create params.require(:rating).permit(:score, :beer_id)
-    if @rating.save
-      current_user.ratings << @rating
+    rating.user = current_user
+    if rating.save
+      current_user.ratings << rating
       redirect_to user_path current_user
     else
       @beers = Beer.all
