@@ -4,6 +4,7 @@ rvm:
  - 2.1.5
 
 os: osx 
+sudo: false
 
 script:
  - bundle exec rake db:migrate --trace
