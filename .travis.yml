@@ -3,7 +3,6 @@ anguage: ruby
 rvm:
  - 2.1.5
 
-os: osx 
 sudo: false
 
 script:
