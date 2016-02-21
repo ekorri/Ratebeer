@@ -33,7 +33,7 @@
     Is a member of
     <ul>
       <% @user.beer_clubs.each do | beer_club| %>
-      <li> <%= beer_club.name %> </li>
+      <li> <%= link_to beer_club.name, beer_club %> </li>
       <% end %>
     </ul>
   <% end %>

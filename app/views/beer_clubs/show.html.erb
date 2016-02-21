@@ -20,14 +20,30 @@
 
 	<ul>
 	 <% @users.each do |user| %>
-	   <li> <%= user.username %> </li>
+	   <li> <%= link_to user.username, user %> </li>
 	 <% end %>
 	</ul>
 <% else%>
 	<p>
     No members
-  	</p>
+  </p>
 <% end %>
+
+<% if current_user %>
+  <% if @beer_club.is_member?(current_user) %>
+    <%= form_for(@membership, method: "delete") do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value: "end the membership" %>
+    <% end %>
+  <% else %>
+   <%= form_for(@membership) do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value:"join the club" %>
+   <% end %>
+  <% end %>
+   
+<% end %>
+
 
 <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
 <%= link_to 'Back', beer_clubs_path %>
