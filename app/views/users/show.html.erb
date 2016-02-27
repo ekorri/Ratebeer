@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Username:</strong>
+<h2>
   <%= @user.username %>
-</p>
+  <% if not @user.active  %>
+      <span class="label label-info">account frozen</span>
+  <% end %>
+</h2>
 
 <div>
   <% if @user.ratings.empty? %>
@@ -13,18 +13,11 @@
   <% end %>
 </div>
 
-<h2>ratings</h2>
+<% if @user.ratings.any? %>
+  <p>Favorite style <%= @user.favorite_style.name %></p>
 
-<ul>
-	<% @user.ratings.each do |rating| %>
-   		<li> 
-   			<%= rating %>
-        	<% if @user == current_user %>
-            	<%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
-        	<% end %> 
-   		</li>
- 	<% end %>
-</ul>
+  <p>Favorite brewery <%= @user.favorite_brewery.name %></p>
+<% end %>
 
 <div>
   <% if @user.beer_clubs.empty? %>
@@ -38,6 +31,27 @@
     </ul>
   <% end %>
 </div>
+
+<p>Ratings</p>
+
+<ul>
+	<% @user.ratings.each do |rating| %>
+   		<li> 
+   			<%= rating %>
+        	<% if @user == current_user %>
+            	<%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+        	<% end %> 
+   		</li>
+ 	<% end %>
+</ul>
+
+<% if current_user and current_user.admin? %>
+    <% if @user.active %>
+      <%= link_to "freeze account", toggle_activity_user_path(@user), method: :post, class: 'btn btn-danger btn-xs' %>
+    <% else %>
+      <%= link_to "activate account", toggle_activity_user_path(@user), method: :post, class: 'btn btn-success btn-xs' %>
+    <% end %>
+<% end %>
 
 <% if current_user %>
   <%= link_to 'Edit', edit_user_path(@user) %> |

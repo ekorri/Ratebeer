@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :styles
+  
   resources :memberships
 
   resources :beer_clubs
@@ -7,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :beers
 
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
 
   root 'breweries#index'
 
@@ -22,6 +26,10 @@ Rails.application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
   resources :places, only:[:index, :show]
   post 'places', to:'places#search'
+
+  resources :users do
+    post 'toggle_activity', on: :member
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
