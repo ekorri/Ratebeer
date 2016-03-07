@@ -80,3 +80,11 @@ gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
 end
+
+gem 'jquery-turbolinks'
+
+gem 'selenium-webdriver'
+
+gem 'database_cleaner'
+
+gem 'rack-mini-profiler'
